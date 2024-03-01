@@ -9,7 +9,7 @@ import LoginForm from './components/LoginForm';
 import { AuthProvider } from './context/AuthContext';
 import ProductSection from './components/ProductSection';
 import Banner from './components/Banner';
-import Layout from './views/layout';
+import Layout from './views/Layout';
 import ProductDetails from './components/ProductDetails';
 import ProtectedRoute from './components/ProtectedRoutes'; 
 import NotFound from './views/NotFound';
@@ -115,7 +115,7 @@ const App = () => {
           <CartProvider>
             <AuthProvider>
               <div>
-                <Navbar/>
+               
                 <Banner />
                 <div className="product-list">
                   <Routes>
