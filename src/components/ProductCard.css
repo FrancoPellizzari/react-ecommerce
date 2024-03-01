@@ -1,0 +1,79 @@
+.product-card {
+    max-width: 200px; 
+    height: auto;
+    margin: 16px;
+    padding: 16px;
+    border: 1px solid #ddd;
+    border-radius: 8px;
+    overflow: hidden;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    text-align: center; 
+  }
+  
+  .product-image {
+    width: 100%;
+    height: auto;
+    border-radius: 8px;
+  }
+  
+  .product-details {
+    margin-top: 16px;
+  }
+  
+  .product-title {
+    font-size: 1.2rem;
+    margin-bottom: 8px;
+  }
+  
+  .product-description {
+    color: #666;
+    margin-bottom: 8px;
+  }
+  
+  .product-price {
+    font-weight: bold;
+    margin-bottom: 8px;
+  }
+  
+  .product-category {
+    font-style: italic;
+    margin-bottom: 8px;
+  }
+  
+  .product-rating {
+    color: #007bff;
+  }
+  
+  .product-list {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+  }
+
+  .light-card {
+    background-color: #fff;
+    color: #0d0c0c;
+    padding: 1rem;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+  }
+  
+  .dark-card .product-card {
+    background-color: #333333; 
+    color: #ffffff; 
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); 
+  }
+  
+  .dark-card .product-image {
+    border: 2px solid #ffffff; 
+  }
+  
+  .dark-card .product-title,
+  .dark-card .product-description,
+  .dark-card .product-price,
+  .dark-card .product-category,
+  .dark-card .product-rating p {
+    color: #ffffff; 
+  }
+  
