@@ -1,54 +1,46 @@
-import React from "react";
-import { useParams, Link, useNavigate } from "react-router-dom";
-import PropTypes from "prop-types";
-import { CartContext } from "../context/CartContext";
+
+import { Link, useParams } from "react-router-dom";
+import { UserContext } from "../context/userContext.jsx";
 import { useContext } from "react";
-import { useAuth } from '../context/AuthContext';
+import { useSelector } from "react-redux";
+import { getAllProducts } from "../redux/reducers/productReducer.js";
 
-const ProductDetails = ({ products }) => {
+export default function ProductDetails() {
+  const products = useSelector(getAllProducts);
+  const { user, setUser } = useContext(UserContext);
   const { id } = useParams();
-  const navigate = useNavigate();
-  const product = products.find((p) => p.id === parseInt(id, 10));
-  const { addToCart } = useContext(CartContext);
-  const { isAuthenticated } = useAuth();
 
-
-  
-
-  if (!product) {
-    // Redirigir a la página principal si el producto no se encuentra
-    navigate('/');
-    // O mostrar un mensaje de error más descriptivo
-    return <div>Producto no encontrado</div>;
-  }
-  // const handleAddToCart = () => {
-  //   addToCart(product); 
-  // };
-  const handleAddToCart = () => {
-    if (isAuthenticated) {
-      addToCart(products);
-    } else {
-      
-      console.log("Usuario no autenticado. Redirigiendo a la página de inicio de sesión.");
-    }
+  const hadleAddToCart = () => {
+    setUser({
+      ...user,
+      shoppingCartItems: [...user.shoppingCartItems, findProduct.id],
+    });
   };
 
-  return (
-    <div>
-      <h2>{product.title}</h2>
-      <p>{product.description}</p>
-      <p>Precio: ${product.price}</p>
-      {isAuthenticated && (
-            <button onClick={handleAddToCart}>Agregar al Carrito</button>
-          )}
-      <Link to="/">Volver a la página principal</Link>
-    </div>
+  const findProduct = products?.find(
+    (product) => product.id.toString() === id.toString()
   );
-};
+  const { title, price, description, image, category } = findProduct;
 
-ProductDetails.propTypes = {
-  products: PropTypes.array.isRequired,
-  addToCart: PropTypes.func.isRequired,
-};
-
-export default ProductDetails;
+  return (
+    <main className="product-details-container">
+      <img
+        src={image}
+        alt={title}
+      />
+      <div className="product-details-description">
+        <Link to="/">Volver</Link>
+        <h2>{title}</h2>
+        <p className="product-details-price">{price}€</p>
+        <p>{description}</p>
+        <p className="product-details-category">Category: {category}</p>
+        <button
+          onClick={hadleAddToCart}
+          className="product-details-btn"
+        >
+          Agregar al carrito
+        </button>
+      </div>
+    </main>
+  );
+}
