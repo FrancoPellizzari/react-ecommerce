@@ -2,7 +2,7 @@ import React, { useState, useEffect } from 'react';
 import { BrowserRouter, Routes, Route } from 'react-router-dom';
 import Navbar from './components/Navbar';
 import Carrito from './components/Cart';
-import data from './data.json';
+import data from './data/db.json';
 import { ThemeProvider } from './context/ThemeContext';
 import { CartProvider } from './context/CartContext';
 import LoginForm from './components/LoginForm';
@@ -22,38 +22,40 @@ const App = () => {
   const [filteredProducts, setFilteredProducts] = useState(data);
   const [cartItems, setCartItems] = useState([]);
   const [currentView, setCurrentView] = useState('products');
-  const [products, setProducts] = useState(data); // data es tu lista completa de productos
-  const [editedProduct, setEditedProduct] = useState({ id: null, title: '', price: 0 });
+  const [products, setProducts] = useState(data.products); 
+  const [editedProduct, setEditedProduct] = useState({ id: null, title: "", price: "" });
   const { isOpen, openModal, closeModal } = useModal();
   const { data: loading, error, createData, updateData, deleteData } = useApi(); 
 
 
   useEffect(() => {
     // Simula cargar los productos desde un servidor JSON
-    setProducts(data);
-    setFilteredProducts(data);
+    setProducts(data.products);
+    setFilteredProducts(data.products);
   }, []);
 
-  const handleEdit = (product) => {
-    console.log('Editing product:', product);
-    setEditedProduct(product);
+  const handleEdit = (id, title, price) => {
+    
+    setEditedProduct({id,title,price});
     openModal();
   };
 
   const handleSave = () => {
-    if (editedProduct !== null) {
-      // Editar producto existente
-      const updatedProducts = products.map((product) =>
-        product.id === editedProduct.id ? editedProduct : product
-      );
-      setProducts(updatedProducts);
-      console.log('Saved product:', editedProduct);
-      closeModal();
+    if (editedProduct.id !== null) {
+      // Verificar que products es un array
+      if (Array.isArray(products)) {
+        const updatedProducts = products.map((product) =>
+          product.id === editedProduct.id ? editedProduct : product
+        );
+        setProducts(updatedProducts);
+        console.log('Saved product:', editedProduct);
+        closeModal();
+      } else {
+        console.error('Error: FWFAFA is not an array');
+      }
     }
   };
-
   const handleDelete = (id) => {
-    // Eliminar producto
     const updatedProducts = products.filter((product) => product.id !== id);
     setProducts(updatedProducts);
     closeModal();
@@ -142,10 +144,10 @@ const App = () => {
                       />
                     <Route path="/login" element={<LoginForm onLogin={handleLogin} />} />
                     <Route
-                    path="/product/:id"
+                    path="/products/:id"
                     element={
                       <ProductDetails
-                        products={filteredProducts}
+                        products={data.products}
                         addToCart={addToCart}
                       />
                     }

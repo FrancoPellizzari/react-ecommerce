@@ -13,7 +13,7 @@ const ProductDetails = ({ products }) => {
   const { isAuthenticated } = useAuth();
 
 
-  console.log("ProductDetails - product:", product);
+  
 
   if (!product) {
     // Redirigir a la página principal si el producto no se encuentra
@@ -26,7 +26,7 @@ const ProductDetails = ({ products }) => {
   // };
   const handleAddToCart = () => {
     if (isAuthenticated) {
-      addToCart(product);
+      addToCart(products);
     } else {
       
       console.log("Usuario no autenticado. Redirigiendo a la página de inicio de sesión.");

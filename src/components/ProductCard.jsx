@@ -49,7 +49,7 @@ const ProductCard = ({ product, onEdit, onDelete, isAuthenticated, userRole }) =
           <div className="product-rating">
             <p>Rating: {rating.rate} ({rating.count} reviews)</p>
           </div>
-          <Link to={`/product/${product.id}`}>Ver Detalles</Link>
+          <Link to={`/products/${product.id}`}>Ver Detalles</Link>
           {isAuthenticated && (
             <button onClick={handleAddToCart}>Agregar al Carrito</button>
           )}
@@ -73,28 +73,6 @@ const ProductCard = ({ product, onEdit, onDelete, isAuthenticated, userRole }) =
   );
 }
 
-ProductCard.propTypes = {
-  product: PropTypes.shape({
-    id: PropTypes.number.isRequired,
-    title: PropTypes.string.isRequired,
-    price: PropTypes.number.isRequired,
-    description: PropTypes.string.isRequired,
-    category: PropTypes.string.isRequired,
-    image: PropTypes.string.isRequired,
-    rating: PropTypes.shape({
-      rate: PropTypes.number.isRequired,
-      count: PropTypes.number.isRequired,
-    }).isRequired,
-  }).isRequired,
-  onEdit: PropTypes.func.isRequired,
-  onDelete: PropTypes.func.isRequired,
-  isAuthenticated: PropTypes.bool.isRequired,
-  
-};
 
-ProductCard.defaultProps = {
-  isAuthenticated: false, 
-  userRole: PropTypes.string, 
-};
 
 export default ProductCard;

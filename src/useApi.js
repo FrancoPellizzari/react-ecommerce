@@ -18,7 +18,7 @@ const useApi = () => {
   const getProducts = async () => {
     try {
       const response = await axios.get(API_URL);
-      console.log(response);
+      
       setProducts(response.data);
     } catch (error) {
       setError(error);
