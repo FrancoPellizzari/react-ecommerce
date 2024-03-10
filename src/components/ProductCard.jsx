@@ -6,13 +6,14 @@ import { CartContext } from '../context/CartContext';
 import { Link } from 'react-router-dom';
 import { useAuth } from '../context/AuthContext';
 import Modal from './Modal';
-import useModal from '../useModal';
+import useModal from '../useModal.jsx';
 
 const ProductCard = ({ product, onEdit, onDelete, isAuthenticated, userRole }) => {
   const { id, title, price, description, category, image, rating } = product;
   const { isOpen, openModal, closeModal } = useModal();
   const {theme, toggleTheme } = useContext(ThemeContext);
   const { addToCart } = useContext(CartContext);
+  
   
   const handleAddToCart = () => {
     if (isAuthenticated) {

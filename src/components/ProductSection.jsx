@@ -23,14 +23,13 @@ import ProductCard from './ProductCard';
 import PropTypes from 'prop-types';
 import { useAuth } from '../context/AuthContext';
 
-import data from '../data/db.json';
 
-const ProductSection = ({ addToCart, onEdit, onDelete }) => {
+const ProductSection = ({products, addToCart, onEdit, onDelete }) => {
   const { isAuthenticated, userRole } = useAuth();
 
   return (
     <>
-      {data.products.map((product) => (
+      {products.map((product) => (
         <ProductCard
           key={product.id}
           product={product}

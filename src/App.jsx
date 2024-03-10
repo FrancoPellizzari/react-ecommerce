@@ -14,23 +14,22 @@ import ProductDetails from './components/ProductDetails';
 import ProtectedRoute from './components/ProtectedRoutes'; 
 import NotFound from './views/NotFound';
 import Modal from './components/Modal'; // Importa el componente Modal
-import useModal from './useModal';
-import useApi from './useApi';
+import useModal from './useModal.jsx';
+import useApi from './useApi.jsx';
 
 const App = () => {
   const [searchTerm, setSearchTerm] = useState('');
   const [filteredProducts, setFilteredProducts] = useState(data);
   const [cartItems, setCartItems] = useState([]);
   const [currentView, setCurrentView] = useState('products');
-  const [products, setProducts] = useState(data.products); 
+  
   const [editedProduct, setEditedProduct] = useState({ id: null, title: "", price: "" });
   const { isOpen, openModal, closeModal } = useModal();
-  const { data: loading, error, createData, updateData, deleteData } = useApi(); 
-
+  const {products, deleteProduct} = useApi(); 
 
   useEffect(() => {
     // Simula cargar los productos desde un servidor JSON
-    setProducts(data.products);
+   
     setFilteredProducts(data.products);
   }, []);
 
@@ -56,9 +55,8 @@ const App = () => {
     }
   };
   const handleDelete = (id) => {
-    const updatedProducts = products.filter((product) => product.id !== id);
-    setProducts(updatedProducts);
-    closeModal();
+    deleteProduct(id);
+    
   };
 
   const handleInputChange = (e) => {
@@ -126,6 +124,7 @@ const App = () => {
                       element={
                         currentView === 'products' && (
                           <ProductSection
+                          products= {products}
                           filteredProducts={filteredProducts}
                           addToCart={addToCart}
                           onEdit={handleEdit}

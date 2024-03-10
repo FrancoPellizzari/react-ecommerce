@@ -52,7 +52,7 @@ const useApi = () => {
     }
   };
 
-  const deleteData = async (id) => {
+  const deleteProduct = async (id) => {
     // Lógica para eliminar un producto de la API
     try {
       await axios.delete(`${API_URL}/${id}`);
@@ -80,7 +80,7 @@ const useApi = () => {
     }
   };
 
-  return { getProducts, handleSave, error, editProduct, createProduct, deleteData };
+  return { getProducts, handleSave, error, editProduct, createProduct, deleteProduct, products };
 };
 
 export default useApi;
