@@ -25,7 +25,7 @@ const App = () => {
   
   const [editedProduct, setEditedProduct] = useState({ id: null, title: "", price: "" });
   const { isOpen, openModal, closeModal } = useModal();
-  const {products, deleteProduct} = useApi(); 
+  const {products, deleteProduct, createProduct, editProduct} = useApi(); 
 
   useEffect(() => {
    
@@ -60,8 +60,12 @@ const App = () => {
   };
 
   const handleSave = () => {
-    // Llama a la función handleSave del hook
-    handleSave();
+    if (editedProduct.id !== null) {
+      editProduct(); // Llama a la función para editar el producto
+    } else {
+      createProduct(); // Llama a la función para crear un nuevo producto
+    }
+    closeModal();
   };
 
 
@@ -137,7 +141,7 @@ const App = () => {
                           products= {products}
                           filteredProducts={filteredProducts}
                           addToCart={addToCart}
-                          onEdit={handleEdit}
+                          onEdit={(id, title, price) => handleEdit(id, title, price)}
                           onDelete={handleDelete}
                         />
                         )

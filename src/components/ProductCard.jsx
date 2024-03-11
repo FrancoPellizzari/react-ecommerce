@@ -29,8 +29,7 @@ const ProductCard = ({ product, onEdit, onDelete, isAuthenticated, userRole }) =
   // };
 
   const handleEdit = () => {
-    // Llama a la función handleEdit del hook
-    handleEdit(product);
+    onEdit(id, title, price);
   };
 
   const handleDelete = () => {

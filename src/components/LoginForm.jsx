@@ -65,7 +65,7 @@
 // export default LoginForm;
 
 
-import React, {useState} from 'react';
+import React, {useState, useEffect} from 'react';
 import { useForm } from 'react-hook-form';
 import { useNavigate, useLocation } from 'react-router-dom';
 import { useAuth } from '../context/AuthContext';
@@ -80,8 +80,17 @@ const LoginForm = ({ onLogin }) => {
   const passwordRepeat = watch("passwordRepeat");
   const [isLoggedIn, setLoggedIn] = useState(false);
 
+  useEffect(() => {
+    const storedUserData = localStorage.getItem('userData');
+    if (storedUserData) {
+      setLoggedIn(true);
+    }
+  }, []);
+
   const onSubmit = handleSubmit(async (data) => {
     const { name, email, password, passwordRepeat } = data;
+
+    
 
     
 
@@ -97,6 +106,7 @@ const LoginForm = ({ onLogin }) => {
   });
 
   const handleLogout = () => {
+    localStorage.removeItem('userData');
     logout();
     setLoggedIn(false);
   };
