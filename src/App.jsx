@@ -28,39 +28,49 @@ const App = () => {
   const {products, deleteProduct} = useApi(); 
 
   useEffect(() => {
-    // Simula cargar los productos desde un servidor JSON
    
     setFilteredProducts(data.products);
   }, []);
 
-  const handleEdit = (id, title, price) => {
+  // const handleEdit = (id, title, price) => {
     
-    setEditedProduct({id,title,price});
-    openModal();
+  //   setEditedProduct({id,title,price});
+  //   openModal();
+  // };
+
+  // const handleSave = () => {
+  //   if (editedProduct.id !== null) {
+  //     if (Array.isArray(products)) {
+  //       const updatedProducts = products.map((product) =>
+  //         product.id === editedProduct.id ? editedProduct : product
+  //       );
+  //       setProducts(updatedProducts);
+  //       console.log('Saved product:', editedProduct);
+  //       closeModal();
+  //     } else {
+  //       console.error('Error: FWFAFA is not an array');
+  //     }
+  //   }
+  // };
+
+  const handleEdit = (product) => {
+    // Llama a la función que establecerá el producto editado en el hook
+    setEditedProduct(product);
+    openModal(); // Puedes usar tu propia lógica para abrir la modal aquí si es necesario
   };
 
   const handleSave = () => {
-    if (editedProduct.id !== null) {
-      // Verificar que products es un array
-      if (Array.isArray(products)) {
-        const updatedProducts = products.map((product) =>
-          product.id === editedProduct.id ? editedProduct : product
-        );
-        setProducts(updatedProducts);
-        console.log('Saved product:', editedProduct);
-        closeModal();
-      } else {
-        console.error('Error: FWFAFA is not an array');
-      }
-    }
+    // Llama a la función handleSave del hook
+    handleSave();
   };
+
+
   const handleDelete = (id) => {
     deleteProduct(id);
     
   };
 
   const handleInputChange = (e) => {
-    // Manejar cambios en los campos del producto editado
     const { name, value } = e.target;
     setEditedProduct((prevProduct) => ({
       ...prevProduct,

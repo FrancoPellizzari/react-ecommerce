@@ -24,8 +24,13 @@ const ProductCard = ({ product, onEdit, onDelete, isAuthenticated, userRole }) =
     }
   };
 
+  // const handleEdit = () => {
+  //   onEdit(product);
+  // };
+
   const handleEdit = () => {
-    onEdit(product);
+    // Llama a la función handleEdit del hook
+    handleEdit(product);
   };
 
   const handleDelete = () => {

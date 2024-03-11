@@ -53,7 +53,6 @@ const useApi = () => {
   };
 
   const deleteProduct = async (id) => {
-    // Lógica para eliminar un producto de la API
     try {
       await axios.delete(`${API_URL}/${id}`);
       setProducts((prevProducts) => prevProducts.filter((product) => product.id !== id));
