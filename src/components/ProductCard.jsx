@@ -48,7 +48,7 @@ const ProductCard = ({ product, onEdit, onDelete, isAuthenticated, userRole }) =
         <img src={image} alt={title} className="product-image" />
         <div className="product-details">
           <h3 className="product-title">{title}</h3>
-          <p className="product-description">{description}</p>
+          
           <p className="product-price">${price}</p>
           <p className="product-category">{category}</p>
           <div className="product-rating">

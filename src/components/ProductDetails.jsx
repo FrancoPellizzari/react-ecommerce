@@ -4,6 +4,7 @@ import PropTypes from "prop-types";
 import { CartContext } from "../context/CartContext";
 import { useContext } from "react";
 import { useAuth } from '../context/AuthContext';
+import './ProductDetails.css';
 
 const ProductDetails = ({ products }) => {
   const { id } = useParams();
@@ -35,6 +36,7 @@ const ProductDetails = ({ products }) => {
 
   return (
     <div>
+      <img src={product.image} alt={product.title} />
       <h2>{product.title}</h2>
       <p>{product.description}</p>
       <p>Precio: ${product.price}</p>

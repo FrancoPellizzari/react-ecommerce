@@ -134,10 +134,11 @@ const LoginForm = ({ onLogin }) => {
           pattern: {
             value: /^[a-zA-Z0-9._-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,4}$/,
             message: 'Ingrese un correo electrónico válido',
-          },  })} />
-                    {errors.email && <span>{errors.email.message}</span>}
-
-      </label>
+          },  onBlur: (e) => console.log(e.target.value),
+        })}
+      />
+      {errors.email && <span>{errors.email.message}</span>}
+    </label>
       <label>
         Contraseña:
         <input {...register("password", { required: true })} type="password" />

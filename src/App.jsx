@@ -19,7 +19,7 @@ import useApi from './useApi.jsx';
 
 const App = () => {
   const [searchTerm, setSearchTerm] = useState('');
-  const [filteredProducts, setFilteredProducts] = useState(data);
+  const [filteredProducts, setFilteredProducts] = useState(data.products); 
   const [cartItems, setCartItems] = useState([]);
   const [currentView, setCurrentView] = useState('products');
   
@@ -32,27 +32,7 @@ const App = () => {
     setFilteredProducts(data.products);
   }, []);
 
-  // const handleEdit = (id, title, price) => {
-    
-  //   setEditedProduct({id,title,price});
-  //   openModal();
-  // };
-
-  // const handleSave = () => {
-  //   if (editedProduct.id !== null) {
-  //     if (Array.isArray(products)) {
-  //       const updatedProducts = products.map((product) =>
-  //         product.id === editedProduct.id ? editedProduct : product
-  //       );
-  //       setProducts(updatedProducts);
-  //       console.log('Saved product:', editedProduct);
-  //       closeModal();
-  //     } else {
-  //       console.error('Error: FWFAFA is not an array');
-  //     }
-  //   }
-  // };
-
+  
   const handleEdit = (product) => {
     // Llama a la función que establecerá el producto editado en el hook
     setEditedProduct(product);
@@ -90,7 +70,7 @@ const App = () => {
   };
 
   const filterProducts = (newSearchTerm) => {
-    const filtered = data.filter((product) =>
+    const filtered = products.filter((product) =>
       product.title.toLowerCase().includes(newSearchTerm.toLowerCase())
     );
     setFilteredProducts(filtered);
@@ -138,10 +118,10 @@ const App = () => {
                       element={
                         currentView === 'products' && (
                           <ProductSection
-                          products= {products}
-                          filteredProducts={filteredProducts}
+                          products= {filteredProducts}
+                          
                           addToCart={addToCart}
-                          onEdit={(id, title, price) => handleEdit(id, title, price)}
+                          onEdit={(id, title, price) => onEdit(id, title, price)}
                           onDelete={handleDelete}
                         />
                         )
@@ -204,3 +184,4 @@ const ProtectedCart = () => (
 );
 
 export default App;
+
